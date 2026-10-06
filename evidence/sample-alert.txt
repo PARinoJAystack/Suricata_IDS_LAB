@@ -1,0 +1,5 @@
+# SAMPLE ONLY — NOT LIVE EVIDENCE
+# Example fast.log-style alert:
+10/05/2026-08:00:00.000000  [**] [1:1000001:1] LAB TEST - TCP 4444 connection detected [**] [Classification: (none)] [Priority: 3] {TCP} <CLIENT_IP>:54321 -> <SURICATA_IP>:4444
+
+# Replace with sanitized output captured from your own authorized lab.

@@ -1,0 +1,55 @@
+SURICATA IDS LAB — COMMAND CHEAT SHEET
+
+PLACEHOLDERS
+<SURICATA_IP>  Sensor IP
+<CLIENT_IP>    Client IP
+<INTERFACE>    Suricata monitoring interface
+<LAB_NETWORK_CIDR>  Authorized lab subnet
+
+INSTALL
+sudo apt update
+sudo apt install -y suricata jq netcat-openbsd
+suricata --build-info
+
+IDENTIFY INTERFACE
+ip -br addr
+ip route
+ip route get <CLIENT_IP>
+export INTERFACE=<INTERFACE>
+
+RULE
+sudo grep -n "LAB TEST" /etc/suricata/rules/local.rules
+Rule:
+alert tcp any any -> any 4444 (msg:"LAB TEST - TCP 4444 connection detected"; flags:S; sid:1000001; rev:1;)
+
+TEST CONFIG
+sudo suricata -T -c /etc/suricata/suricata.yaml
+
+LISTEN
+nc -lvnp 4444
+
+START IDS
+sudo suricata -c /etc/suricata/suricata.yaml -i "$INTERFACE" -l /var/log/suricata
+
+TRIGGER
+nc -vz <SURICATA_IP> 4444
+
+ANALYZE fast.log
+sudo grep -n "LAB TEST" /var/log/suricata/fast.log
+
+ANALYZE eve.json
+sudo grep '"event_type":"alert"' /var/log/suricata/eve.json | tail
+sudo grep '1000001' /var/log/suricata/eve.json | tail
+sudo jq 'select(.event_type=="alert")' /var/log/suricata/eve.json | tail -n 1
+
+PACKET CHECK
+sudo tcpdump -ni <INTERFACE> tcp port 4444
+
+LISTENER CHECK
+sudo ss -lntp | grep ':4444'
+
+TROUBLESHOOT
+No route to host -> check ip addr, ip route, VM network attachment and firewall.
+Connection refused -> verify nc listener with ss -lntp.
+Wrong interface -> use ip route get <CLIENT_IP>.
+No alerts -> run suricata -T, grep SID 1000001, and tcpdump the interface.

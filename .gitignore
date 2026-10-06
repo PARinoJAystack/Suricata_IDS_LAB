@@ -1,0 +1,20 @@
+# OS/editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+
+# Local/private evidence
+.env
+*.pcap
+*.pcapng
+evidence/live-*
+evidence/private-*
+
+# Large generated logs
+*.log
+*.jsonl
+
+# Keep sanitized sample evidence if intentionally committed.
+!evidence/sample-alert.txt
+suricata/rules/suricata.rules

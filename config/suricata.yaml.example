@@ -1,0 +1,11 @@
+# Example lab configuration notes
+# Do not blindly replace your distribution's /etc/suricata/suricata.yaml.
+# Confirm these concepts in the installed configuration.
+
+HOME_NET: "[<LAB_NETWORK_CIDR>]"
+rule-files:
+  - suricata.rules
+  - local.rules
+
+# Run the lab sensor explicitly on:
+# <INTERFACE>

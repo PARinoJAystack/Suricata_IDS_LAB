@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-10-05T14:32:10.302911+0100",
+  "flow_id": 1482051938226473,
+  "in_iface": "enp0s8",
+  "event_type": "alert",
+  "src_ip": "192.168.56.20",
+  "src_port": 51234,
+  "dest_ip": "192.168.56.10",
+  "dest_port": 4444,
+  "proto": "TCP",
+  "alert": {
+    "action": "allowed",
+    "gid": 1,
+    "signature_id": 1000002,
+    "rev": 1,
+    "signature": "LAB Netcat - Marker string SURICATA-LAB-TEST in payload",
+    "category": "A Network Trojan was detected",
+    "severity": 1
+  },
+  "flow": {
+    "pkts_toserver": 4,
+    "pkts_toclient": 3,
+    "bytes_toserver": 306,
+    "bytes_toclient": 218,
+    "start": "2026-10-05T14:32:10.301847+0100"
+  },
+  "payload": "U1VSSUNBVEEtTEFCLVRFU1QgaGVsbG8gZnJvbSBjbGllbnQK",
+  "payload_printable": "SURICATA-LAB-TEST hello from client\n",
+  "stream": 1
+}
